@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(236, 236, 236);
+}
+
+.App {
+  background-color: honeydew;
+  width: 500px;
+  height: 400px;
+  margin: 50px auto;
+  border-radius: 5px;
+  display: grid;
+  grid-template-rows: 6fr 2fr 1.5fr
+}
+
+/* button bar */
+.post-img {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-details-bar {
+  background-color: white;
+  padding: 5px 8px 5px 8px;
+  font-size: 1.1rem;
+}
+
+.post-details-bar h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.post-btn-bar {
+  background-color: ivory;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 2fr;
+  width: 100%;
+}
+
+.post-btns {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.poster-alias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.count-display {
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  background-color: black;
+  border-radius: 30px;
+  left: 18px;
+  bottom: 15px;
+  color: white;
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.count-display div {
+  margin-bottom: .5px;
+}
+
+.heart-btn {
+  position: relative;
+}
+
+.retweet-btn {
+  position: relative;
+}
+
+.comment-btn {
+  position: relative;
+}
