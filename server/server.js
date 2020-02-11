@@ -5,7 +5,6 @@ const express = require("express")
 
 //models
 const postRoutes = require("./routes/post-routes")
-
 const app = express()
 const port = process.env.PORT || 5000
 

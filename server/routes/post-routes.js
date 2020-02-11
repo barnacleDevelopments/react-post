@@ -4,8 +4,9 @@ const router = express.Router()
 //models 
 const Post = require("../models/Post")
 
+mongoose.set('useFindAndModify', false);
+
 router.route("/").get((req, res, next)=> {
-    console.log("eee")
     Post.find({}, (err, data) => {
         if(err) {
             console.log(err)
@@ -15,7 +16,18 @@ router.route("/").get((req, res, next)=> {
             res.send(data)
         }
     })
+})
 
+router.route("/:id").put((req, res, nest) => {
+    let newThumbs = req.body
+    console.log(req.body)
+    Post.findByIdAndUpdate(req.params.id, newThumbs, (err, data) => {
+        if(err) {
+            console.log(err)
+        } else {
+            
+        }
+    })
 
 })
 

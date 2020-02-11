@@ -10,48 +10,57 @@ const Post = (props) => {
 
   const post = props.post
 
-  console.log(post)
-
-  const [currentStateThumbs, setCurrentStateThumbs] = useState(post.thumbs)
-  const [currentStateComments, setCurrentStateComments] = useState()
-  const [currentStateRetweets, setCurrentStateRetweets] = useState()
-  const [thumbsUps, setThumbsUps] = useState(post.thumbs)
-  const [comments, setComments] = useState(0)
-  const [retweets, setRetweets] = useState(0)
+  const [thumbsUps, setThumbsUps]                       = useState()
+  const [comments, setComments]                         = useState(0)
+  const [retweets, setRetweets]                         = useState(0)
 
   useEffect(() => {
-    setCurrentStateThumbs(thumbsUps)
+    setThumbsUps(post.thumbs)
   }, [])
 
   function thumbsUp() {
-    if(currentStateThumbs === thumbsUps) {
+    if(post.thumbs === thumbsUps) {
       setThumbsUps(thumbsUps + 1)
+      console.log(thumbsUps)
+      axios.put(`http://localhost:5000/posts/${post._id}`, {thumbs: thumbsUps + 1 })
+      .then((data) => {
+        console.log(data)
+      }).catch((err) => {
+        console.log(err)
+      })
     } else {
       setThumbsUps(thumbsUps - 1)
+      let thumb = thumbsUp -1
+      axios.put(`http://localhost:5000/posts/${post._id}`, {thumbs: thumbsUps - 1 })
+      .then((data) => {
+        console.log(data)
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 
-  function commentUp() {
-      if(currentStateThumbs === thumbsUps) {
-        setThumbsUps(thumbsUps + 1)
-      } else {
-        setThumbsUps(thumbsUps - 1)
-      }
-  }
-  function retweetUp() {
-    if(currentStateThumbs === thumbsUps) {
-        setThumbsUps(thumbsUps + 1)
-    } else {
-        setThumbsUps(thumbsUps - 1)
-    }
-  }
+  // function commentUp() {
+  //     if(currentStateThumbs === thumbsUps) {
+  //       setThumbsUps(thumbsUps + 1)
+  //     } else {
+  //       setThumbsUps(thumbsUps - 1)
+  //     }
+  // }
+  // function retweetUp() {
+  //   if(currentStateThumbs === thumbsUps) {
+  //       setThumbsUps(thumbsUps + 1)
+  //   } else {
+  //       setThumbsUps(thumbsUps - 1)
+  //   }
+  // }
  
 
 
   return (
-    <div className="App">
+    <div className="post">
       <PostImage />
-      <PostDetailBar commentsCountFunction={commentUp} commentCount={currentStateComments} />
+      <PostDetailBar  />
       <ButtonBar thumbsCountFunction={thumbsUp} thumbsCount={thumbsUps}/> 
     </div>
   );

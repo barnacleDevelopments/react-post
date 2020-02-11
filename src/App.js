@@ -1,7 +1,11 @@
 import './App.css';
 import React, { useEffect, useState } from "react"
-import Post from "./components/Post"
 import axios from "axios"
+
+//components
+import Post from "./components/Post"
+import PostForm from "./components/PostForm"
+import PostContainer from "./components/PostContainer"
 
 const App = () => {
 
@@ -9,20 +13,18 @@ const App = () => {
 
 useEffect(() => {
     axios.get("http://localhost:5000/posts")
-    .then(data => {
-        setPosts(data.data)
-    })
-
-    .catch((err) => {
-        console.log(err)
-    })
+    .then(data => setPosts(data.data))
+    .catch(err => console.log(err))
 }, [])
 
     return (
-        <div>
-            {posts.map((post, idx) => {
-                return <Post key={idx} post={post}/>
-            })} 
+        <div className="App">
+            <PostContainer>
+            <PostForm />
+                {posts.map((post, idx) => {
+                    return <Post key={idx} post={post}/>
+                })} 
+            </PostContainer>
         </div>
     )
 }
