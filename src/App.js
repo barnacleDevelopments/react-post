@@ -17,6 +17,32 @@ useEffect(() => {
     .catch(err => console.log(err))
 }, [])
 
+// useEffect(() => {
+//     setThumbsUps(post.thumbs)
+//   }, [])
+
+//   function thumbsUp() {
+//     if(post.thumbs === thumbsUps) {
+//       setThumbsUps(thumbsUps + 1)
+//       console.log(thumbsUps)
+//       axios.put(`http://localhost:5000/posts/${post._id}`, {thumbs: thumbsUps + 1 })
+//       .then((data) => {
+//         console.log(data)
+//       }).catch((err) => {
+//         console.log(err)
+//       })
+//     } else {
+//       setThumbsUps(thumbsUps - 1)
+//       let thumb = thumbsUp -1
+//       axios.put(`http://localhost:5000/posts/${post._id}`, {thumbs: thumbsUps - 1 })
+//       .then((data) => {
+//         console.log(data)
+//       }).catch((err) => {
+//         console.log(err)
+//       })
+//     }
+//   }
+
     return (
         <div className="App">
             <PostContainer>
