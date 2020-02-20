@@ -1,32 +1,49 @@
 import './App.css';
-import React, { useEffect, useState } from "react"
-import axios from "axios"
+import React, { useEffect} from "react"
+import { connect } from "react-redux"
+
+//actions
+import fetchPosts from "./redux/actions/fetch-posts"
 
 //components
 import Post from "./components/Post"
 import PostForm from "./components/PostForm"
 import PostContainer from "./components/PostContainer"
 
-const App = () => {
+const App = (props) => {
 
-    const [posts, setPosts] = useState([])
+    useEffect(() => {
+        props.getAllPosts()
+    }, [])
 
-useEffect(() => {
-    axios.get("http://localhost:5000/posts")
-    .then(data => setPosts(data.data))
-    .catch(err => console.log(err))
-}, [])
-
-    return (
+    console.log(props.posts)
+      return (
         <div className="App">
             <PostContainer>
             <PostForm />
-                {posts.map((post, idx) => {
-                    return <Post key={idx} post={post}/>
-                })} 
+              {props.posts.map(post => {
+                  return <Post key={post.id} post={post}/>
+              })}
             </PostContainer>
         </div>
     )
 }
 
-export default App
+
+function mapStateToProps(state) {
+    let posts = Object.keys(state.postReducer.entities.posts).map(key => state.postReducer.entities.posts[key])
+    return {
+        posts: posts
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getAllPosts: () => {
+            dispatch(fetchPosts())
+        }
+    }
+   
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (App)

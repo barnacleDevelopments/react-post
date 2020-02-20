@@ -1,16 +1,37 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
+import { connect } from "react-redux"
+import axios from "axios"
 
+//actions 
+import addThumbUp from "../redux/actions/add-thumb-up"
+import removeThumbUp from "../redux/actions/remove-thumb-up"
+
+//components
 import CommentButton from "../components/CommentButton"
 import EmailButton from  "../components/EmailButton"
 import HeartButton from  "../components/HeartButton"
 import RetweetButton from  "../components/RetweetButton"
 
 const ButtonBar = (props) => {
+
+
+  //   if(currentThumbCount.current === props.thumbsCount) {
+  //     axios.put(`http://localhost:5000/posts/${props.id}`, {thumbs: props.thumbsCount + 1 })
+  //     .catch(err => console.log(err))
+  //     props.addThumb(props.id)
+  //   } else {
+  //     console.log("hello")
+  //     axios.put(`http://localhost:5000/posts/${props.id}`, {thumbs: props.thumbsCount - 1 })
+  //     .catch(err => console.log(err))
+  //     props.removeThumb(props.id)
+  //   
+
+
     return (
       <div className="post-btn-bar">
         <div className="post-btns">
          <CommentButton />
-         <HeartButton thumbsCountFunction={props.thumbsCountFunction} thumbsCount={props.thumbsCount} />
+         <HeartButton thumbsCount={props.thumbsCount} />
          <RetweetButton />
          <EmailButton />
          </div>
@@ -22,5 +43,23 @@ const ButtonBar = (props) => {
     )
   }
 
-  export default ButtonBar
+  function mapStateToProps(state) {
+    return {
+      post: state.postReducer
+    }
+  }
+
+
+  function mapDispatchToProps(dispath) {
+    return {
+      addThumb: (id) => {
+        dispath(addThumbUp(id))
+      },
+      removeThumb: (id) => {
+        dispath(removeThumbUp(id))
+      }
+    }
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps) (ButtonBar)
 
