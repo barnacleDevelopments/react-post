@@ -1,3 +1,5 @@
+"use strict"
+
 import { postActions } from "../action-types"
 import _ from "lodash"
 
@@ -40,8 +42,10 @@ const postReducer = (state = inititalState, action) => {
                     [post.id] : {
                         content: post.content,
                         id: post.id,
+                        thumbs: post.thumbs,
                         postId: action.payload.postId,
                         comments: [...post.comments, action.payload.id]
+
                     }
                 }
             }
@@ -49,24 +53,47 @@ const postReducer = (state = inititalState, action) => {
     
     // //add/remove thumbs ups
         case postActions.ADD_THUMB_UP:
-            const postThumbs = state.entities.posts
-            return {...state,
-                entities: {
-                    comments: {
-                        ...state.entities.comments
-                    },
-                    posts:{
-                        ...state.entities.posts,
+            let postId = state.entities.posts[action.id]
+            if(action.isUp) {
+                return {...state,
+                    entities: {
+                        comments: {
+                            ...state.entities.comments
+                        },
+                        posts:{
+                            ...state.entities.posts,
+                            [postId.id]: {
+                                content: postId.content,
+                                id: postId.id,
+                                thumbs: postId.thumbs + 1,
+                                comments: [...postId.comments],
+                                thumbStatus: action.isUp
+                            }
+                           
+                        }
                     }
-                }
             }
-        // case postActions.REMOVE_THUMB_UP:
-        //     return state.map((post) => {
-        //         if(post._id === action.id) {
-        //             post.thumbs -= 1
-        //         }
-        //         return post
-        //     })
+            } else {
+                return {...state,
+                    entities: {
+                        comments: {
+                            ...state.entities.comments
+                        },
+                        posts:{
+                            ...state.entities.posts,
+                            [postId.id]: {
+                                content: postId.content,
+                                id: postId.id,
+                                thumbs: postId.thumbs - 1,
+                                comments: [...postId.comments],
+                                thumbStatus: action.isUp
+                            }
+                           
+                        }
+                    }
+            }
+            }
+     
         default:
             return state
     }

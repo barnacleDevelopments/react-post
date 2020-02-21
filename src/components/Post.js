@@ -15,7 +15,7 @@ const Post = (props) => {
     <div className="post">
       <PostImage />
       <PostDetailBar postContent={props.post.content}/>
-      <ButtonBar thumbsCount={props.post.thumbs} id={props.post._id}/> 
+      <ButtonBar thumbsCount={props.post.thumbs} id={props.post.id}/> 
       <CommentForm id={props.post.id}/>
       <CommentsList comments={props.comments}/>
     </div>

@@ -19,6 +19,7 @@ const App = (props) => {
     console.log(props.posts)
       return (
         <div className="App">
+        
             <PostContainer>
             <PostForm />
               {props.posts.map(post => {
@@ -28,7 +29,6 @@ const App = (props) => {
         </div>
     )
 }
-
 
 function mapStateToProps(state) {
     let posts = Object.keys(state.postReducer.entities.posts).map(key => state.postReducer.entities.posts[key])

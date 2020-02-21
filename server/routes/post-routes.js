@@ -41,10 +41,10 @@ router.route("/create").post((req, res, next) => {
 })
 
 
-Post.create({
-    content: "Stuff",
-    thumbs: 0 
-})
+// Post.create({
+//     content: "Stuff",
+//     thumbs: 0 
+// })
 //======================
 //post content
 //======================
