@@ -1,14 +1,17 @@
 import './App.css';
 import React, { useEffect} from "react"
 import { connect } from "react-redux"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 //actions
 import fetchPosts from "./redux/actions/fetch-posts"
 
 //components
-import Post from "./components/Post"
-import PostForm from "./components/PostForm"
 import PostContainer from "./components/PostContainer"
+
+import Navbar from "./components/Navbar"
+import Nav from "./components/Nav"
+import UserContainer from "./components/UserContainer"
 
 const App = (props) => {
 
@@ -19,23 +22,26 @@ const App = (props) => {
     console.log(props.posts)
       return (
         <div className="App">
-        
-            <PostContainer>
-            <PostForm />
-              {props.posts.map(post => {
-                  return <Post key={post.id} post={post}/>
-              })}
-            </PostContainer>
+            <Router>
+                    <Navbar>
+                        <Nav />
+                    </Navbar>
+
+
+                <Switch>
+                    <Route path="/feed">
+                        <PostContainer />
+                    </Route>
+
+                    <Route path="/users">
+                        <UserContainer />
+                    </Route>
+                </Switch>
+            </Router>
         </div>
     )
 }
 
-function mapStateToProps(state) {
-    let posts = Object.keys(state.postReducer.entities.posts).map(key => state.postReducer.entities.posts[key])
-    return {
-        posts: posts
-    }
-}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -46,4 +52,4 @@ function mapDispatchToProps(dispatch) {
    
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (App)
+export default connect(null, mapDispatchToProps) (App)
