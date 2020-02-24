@@ -5,6 +5,7 @@ import addThumbUp from "../redux/actions/add-thumb-up"
 const HeartButton = (props) => {
 
 function addThumb() {
+  console.log(props.id)
   let post = props.posts[props.id]
   if(!post.thumbStatus) {
       props.addThumbUp(props.id, true, post.thumbs)
@@ -15,10 +16,10 @@ function addThumb() {
 }
 
     return (
-      <div className="heart-btn" onClick={addThumb}>
+      <button className="heart-btn" onClick={addThumb}>
         <div className="count-display"><div>{props.thumbsCount}</div></div>
         <div ><i className="fas fa-thumbs-up"></i></div>
-      </div>
+      </button>
     )
   }
 

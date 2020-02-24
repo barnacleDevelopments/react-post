@@ -7,11 +7,11 @@ import HeartButton from  "../components/HeartButton"
 import RetweetButton from  "../components/RetweetButton"
 
 const ButtonBar = (props) => {
-
+console.log(props.commentLength)
     return (
       <div className="post-btn-bar">
         <div className="post-btns">
-         <CommentButton />
+         <CommentButton toggleComments={props.toggleComments} commentsLength={props.commentsLength}/>
          <HeartButton thumbsCount={props.thumbsCount} id={props.id} />
          <RetweetButton />
          <EmailButton />

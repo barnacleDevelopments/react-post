@@ -1,11 +1,12 @@
 import React from "react"
 
-const CommentButton = () => {
+const CommentButton = (props) => {
+  console.log(props.commentsLength)
     return (
-      <div className="comment-btn">
-        <div className="count-display"><div></div></div>
+      <button className="comment-btn" onClick={props.toggleComments}>
+        <div className="count-display"><div>{props.commentsLength}</div></div>
         <div><i className="far fa-comment-dots"></i></div>
-      </div>
+      </button>
     )
   }
 

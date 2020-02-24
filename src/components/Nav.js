@@ -11,6 +11,10 @@ const Nav = () => {
             <li>
                 <Link to="/users">Profile</Link>
             </li>
+
+            <li>
+                <Link to="/">login</Link>
+            </li>
         </ul>
     )
 }

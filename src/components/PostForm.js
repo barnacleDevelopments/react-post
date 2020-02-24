@@ -26,8 +26,7 @@ const PostForm = (props) => {
             <form onChange={handleFormInput}>
                 <div className="form-user-icon"></div>
                     <div className="form-content">
-                        <div className="form-text-area" contentEditable="true"></div>
-                        <input type="text-area" name="content"/>
+                        <input className="post-content-input" type="text-area" name="content"/>
                        <div className="form-btn-bar">
                         <div>
                             <input type="file" name="post-images"/>

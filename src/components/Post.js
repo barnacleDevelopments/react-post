@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from "react-redux"
 
 //components
@@ -10,25 +10,35 @@ import CommentsList from "../components/CommentsList"
 
 const Post = (props) => {
 
+  const [commentsIsOpen, setCommentsIsOpen] = useState(false)
  
+ function toggleComments() {
+  if(commentsIsOpen) {
+    setCommentsIsOpen(false)
+  } else {
+    setCommentsIsOpen(true)
+  }
+ }
+ console.log(props.comments.length)
   return (
     <div className="post">
       <PostImage />
-      <PostDetailBar postContent={props.post.content}/>
-      <ButtonBar thumbsCount={props.post.thumbs} id={props.post.id}/> 
-      <CommentForm id={props.post.id}/>
-      <CommentsList comments={props.comments}/>
+      <PostDetailBar postContent={props.content}/>
+      <ButtonBar toggleComments={toggleComments} thumbsCount={props.thumbs} commentsLength={props.comments.length} id={props.id}/> 
+      <CommentForm toggleComments={toggleComments} id={props.id}/>
+      {commentsIsOpen ? <CommentsList comments={props.comments}/> : <div></div>}
     </div>
   );
 }
 
 const mapStateToProps = (state, currentProps ) => {
-
-  let comments
-  comments = state.postReducer.entities.posts[currentProps.post.id].comments
+  let post = state.postReducer.entities.posts[currentProps.post.id]
 
   return {
-    comments: comments
+    comments: post.comments,
+    content: post.content,
+    thumbs: post.thumbs,
+    id: post.id
   }
 }
 

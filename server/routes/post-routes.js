@@ -1,12 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const mongoose = require("mongoose")
 
 //models 
 const Post = require("../models/Post")
 const Comment = require("../models/Comment")
 
-mongoose.set('useFindAndModify', false);
 
 //get all posts
 
@@ -15,10 +13,7 @@ router.route("/").get((req, res, next) => {
                 if(err) {
                     console.log(err)
                 } else {
-                    posts.forEach(post => {
-                       
-                        console.log(post)
-                    })
+                   
                     res.send(posts)
                 }
             })
@@ -69,8 +64,6 @@ router.route("/:id/comments/create").post((req, res, next) => {
         content: req.body["content"],
         postId: req.params.id
     } 
-
-    console.log(req.body)
 
     Comment.create(commentInfo, (err, comment) => {
         if(err) {

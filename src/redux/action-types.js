@@ -11,3 +11,7 @@ export const postActions = {
     CREATE_COMMENT:  "CREATE_COMMENT"
 }
 
+export const userActions = {
+    CREATE_USER: "CREATE_USER"
+}
+

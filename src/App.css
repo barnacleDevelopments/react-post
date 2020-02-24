@@ -1,11 +1,11 @@
 body {
-  background-color: rgb(236, 236, 236);
 }
 
 .App {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 10px;
+  background-color: rgb(63, 71, 82);
 }
 
 .post-container {
@@ -14,16 +14,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
 }
 
 .post {
-  background-color: ivory;
   width: 100%;
   margin-top: 10px;
   border-radius: 5px;
   display: grid;
   grid-template-rows: 4fr 3fr 2fr;
+  background-color: rgb(106, 115, 128);
+  border-radius: 5px;
 }
 
 /* button bar */
@@ -34,6 +34,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-left-radius: 5px;
 }
 
 .post-img img {
@@ -52,7 +53,6 @@ body {
 }
 
 .post-btn-bar {
-  background-color: ivory;
   width: 100%;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -66,6 +66,12 @@ body {
   width: 300px;
   justify-content: space-around;
   align-items: center;
+}
+
+.post-btns > button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
 }
 
 .poster-alias {
@@ -112,19 +118,24 @@ body {
 
 .post-form {
   padding: 10px;
-  background-color: ivory;
+  background-color: rgb(106, 115, 128);
+  border-radius: 5px;
 }
 
 .post-form form {
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   display: grid;
+  grid-gap: 10px;
   grid-template-columns: 1fr 3fr;
+  background-color: rgb(106, 115, 128);
 } 
 
 .form-btn-bar {
   display: flex;
   width: 100%;
+  height: 40px;
   justify-content: space-between;
 }
 
@@ -132,29 +143,30 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-
 }
 
 .form-content {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 10px;
+  grid-template-rows: 2fr 1fr;
+  grid-gap: 10px;  
 }
 
-.form-text-area {
-  background-color: white;
-  height: 100%; ;
-  border: 2px solid black;
+.post-content-input {
+  border: none;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  border-radius: 5px;
 }
 
 .form-user-icon {
   background-color: white;
-  border: 2px solid black;
-  width: 70px;
-  height: 70px;
+  border: none;
+  width: 80px;
+  height: 80px;
   border-radius: 50px;
 
 }
@@ -162,14 +174,13 @@ body {
 /* comment form */
 .comment-form {
   margin: 10px;
-  background-color: ivory;
 }
 
 .comment-form input {
   border: none;
-  border: 1px solid rgba(0, 0, 0, 0.116);
-  border-radius: 15px;
-  padding: 5px;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
   width: 90%;
   height: 20px;
 }
@@ -177,7 +188,7 @@ body {
 .comments-list {
   height: 100px;
   overflow-y: scroll;
-  padding: 10px;
+  padding: 0px;
   margin: 0px;
 }
 
@@ -192,7 +203,10 @@ body {
 /* navigation */
 
 .navbar {
-  background-color: ivory;
+  background-color: rgb(106, 115, 128);
+  border-top-right-radius: 5px;
+  font-weight: 600;
+  
 }
 
 .nav {
@@ -204,9 +218,6 @@ body {
 }
 
 .nav li {
-  border-bottom: 2px solid black;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
   height: 70px;
   display: flex;
   justify-content: center;
@@ -217,20 +228,16 @@ body {
   background-color: cornsilk;
 }
 
-.nav li:nth-of-type(1) {
-  border-top: 2px solid black;
-}
-
 .nav li > a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 1.3rem;
   text-transform: uppercase;
 }
 /* Profile page*/
 
 .profile-title {
-  background-color: white ;
+  background-color: #6a7380 ;
   height: 40px;
   padding: 10px;
 }
@@ -240,25 +247,26 @@ body {
   border: none;
   height: 100%;
   width: 50px;
-  border: 2px solid black;
-  border-radius: 50px;  
+  border: 2px solid white;
+  border-radius: 50px; 
+  color: white; 
 }
 
 
 .profile-title button:hover {
-  background-color: black;
+  background-color: white;
   border: none;
-  color: white;
+  color: #6a7380;
 }
 
 .profile-wigit {
-  background-color: ivory;
+  background-color:  rgba(49, 51, 66, 0.466);
   height: 1300px;
 }
 
 .user-wallpaper {
   height: 150px;
-  background-color: tomato;
+  background-color:#6a7380
 }
 
 .user-details {
@@ -289,6 +297,7 @@ body {
 } 
 
 
-
-
+i {
+  color: white;
+}
 

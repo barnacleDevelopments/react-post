@@ -17,6 +17,7 @@ const CommentForm = (props) => {
         let comment = fields
         comment.posterName ="Sarah"
         props.createNewComment(comment, props.id)
+        props.toggleComments()
     }
 
 
