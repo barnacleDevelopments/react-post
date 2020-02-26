@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.6.4",
     "@meanie/mongoose-to-json": "^2.4.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -13,6 +14,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
+    "express-jwt": "^5.3.1",
+    "jwks-rsa": "^1.7.0",
     "lodash": "^4.17.15",
     "lodash.merge": "^4.6.2",
     "mongoose": "^5.8.11",
@@ -32,7 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start ",
-    "dev": "concurrently \"cd server && nodemon server.js\" \"npm run start\"",
+    "dev": "concurrently \"cd server && nodemon server.js --exec babel-node -e js\" \"npm run start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -53,7 +56,11 @@
     ]
   },
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1"
+  },
   "author": "",
   "license": "ISC",
   "description": ""

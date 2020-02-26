@@ -1,21 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react";
+import { Route } from "react-router-dom";
+import { useAuth0 } from "../react-auth0-spa";
 
-//components 
-import ProfileTitle from ".//ProfileTitle"
-import UserNav from "./UserNav"
-import UserDetails from "./UserDetails"
-import UserFeed from "./UserFeed"
+import UserProfile from "./UserProfile"
 
-const UserContainer = props => {
-    return (
-        <div>
-            <ProfileTitle />
-            <UserDetails />
-            <UserNav />
-            <UserFeed />
-        </div>
-   
-    )
-}
+const UserContainer = ({ component: Component, path, ...rest }) => {
+  const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
-export default UserContainer
+  useEffect(() => {
+    if (loading || isAuthenticated) {
+      return;
+    }
+    const fn = async () => {
+      await loginWithRedirect({
+        appState: { targetUrl: path }
+      });
+    };
+    fn();
+  }, [loading, isAuthenticated, loginWithRedirect, path]);
+
+  const render = props =>
+    isAuthenticated === true ? <UserProfile {...props} /> : null;
+
+  return <Route path={path} render={render} {...rest} />;
+};
+
+export default UserContainer;

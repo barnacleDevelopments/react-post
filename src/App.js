@@ -1,7 +1,12 @@
 import './App.css';
-import React, { useEffect} from "react"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+
+// Auth
+import { useAuth0 } from "./react-auth0-spa";
+import history from "./utils/history"
+
 
 //actions
 import fetchPosts from "./redux/actions/fetch-posts"
@@ -11,54 +16,59 @@ import PostContainer from "./components/PostContainer"
 import LoginContainer from "./components/LoginContainer"
 import Navbar from "./components/Navbar"
 import Nav from "./components/Nav"
+import UserProfile from "./components/UserProfile"
 import UserContainer from "./components/UserContainer"
 
 
 const App = (props) => {
 
-    useEffect(() => {
-        props.getAllPosts()
-    }, [])
+  const { loading } = useAuth0();
 
-    console.log(props.posts)
-      return (
-        <div className="App">
-            <Router>
-                
+  useEffect(() => {
+    props.getAllPosts()
+  }, [])
 
-                <Navbar>
-                    <Nav />
-                </Navbar>
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-                    <Switch>
+  console.log(props.posts)
+  return (
+    <div className="App">
+      <Router history={history}>
+        <Navbar>
+          <Nav />
+        </Navbar>
 
-                        <Route exact path="/">
-                            <LoginContainer  />
-                        </Route>
-                    
-                        <Route path="/feed">
-                            <PostContainer />
-                        </Route>
+        <Switch>
 
-                        <Route path="/users">
-                            <UserContainer />
-                        </Route>
+          <Route exact path="/">
+            <LoginContainer />
+          </Route>
 
-                    </Switch>
-                
-            </Router>
-        </div>
-    )
+          <Route path="/feed">
+            <PostContainer />
+          </Route>
+
+          <Route path="/users">
+            <UserContainer />
+          </Route>
+
+        </Switch>
+
+      </Router>
+    </div>
+  )
 }
 
 
 function mapDispatchToProps(dispatch) {
-    return {
-        getAllPosts: () => {
-            dispatch(fetchPosts())
-        }
+  return {
+    getAllPosts: () => {
+      dispatch(fetchPosts())
     }
-   
+  }
+
 }
 
-export default connect(null, mapDispatchToProps) (App)
+export default connect(null, mapDispatchToProps)(App)

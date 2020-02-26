@@ -1,13 +1,15 @@
-const express = require("express")
-      mongoose = require("mongoose"),
-      bodyParser = require("body-parser"),
-      cors       = require("cors"),
-      fileUpload = require("express-fileupload")
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import cors from "cors";
+import fileUpload from "express-fileupload";
+import jwt from "express-jwt";
+import jwks from "jwks-rsa";
 
 
 //routes
-const postRoutes = require("./routes/post-routes")
-const userRoutes = require("./routes/user-routes")
+import postRoutes from "./routes/post-routes"
+import userRoutes from "./routes/user-routes"
 const app = express()
 const port = process.env.PORT || 5000
 
@@ -18,15 +20,15 @@ app.use(fileUpload())
 
 mongoose.set('useFindAndModify', false);
 
-mongoose.connect("mongodb://127.0.0.1:27017/mediaPost",  { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => {
+mongoose.connect("mongodb://127.0.0.1:27017/mediaPost", { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
     console.log(`connected to database!`)
-}).catch(()=> {
+  }).catch(() => {
     console.log(`error connecting to database!`)
-})
+  })
 
 app.get("/", (req, res, next) => {
-    res.send("Welcome to node!")
+  res.send("Welcome to node!")
 })
 
 app.use("/posts", postRoutes)
@@ -34,5 +36,5 @@ app.use("/users", userRoutes)
 
 
 app.listen(port, () => {
-    console.log(`Connect to port: ${port}`)
+  console.log(`Connect to port: ${port}`)
 })
